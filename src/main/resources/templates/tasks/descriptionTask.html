@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments/header :: header"></div>
+
+<h3>Описание задачи</h3>
+
+<div class="card p-3 mb-3">
+    <p><b>Описание:</b> <span th:text="${task.description}"></span></p>
+    <p><b>Создано:</b> <span th:text="${task.created}"></span></p>
+    <p>
+        <b>Статус:</b>
+        <span th:if="${task.done}" class="text-success">Выполнено</span>
+        <span th:if="${!task.done}" class="text-warning">Новое</span>
+    </p>
+</div>
+
+<form th:if="${!task.done}"
+      th:action="@{/tasks/{id}/done(id=${task.id})}"
+      method="post"
+      style="display:inline;">
+    <button class="btn btn-success">Выполнено</button>
+</form>
+
+<button th:if="${task.done}" class="btn btn-secondary" disabled>
+    Уже выполнено
+</button>
+
+<a th:href="@{/tasks/{id}/update(id=${task.id})}"
+   class="btn btn-primary">
+    Редактировать
+</a>
+
+<form th:action="@{/tasks/{id}/delete(id=${task.id})}"
+      method="get"
+      style="display:inline;">
+    <button class="btn btn-danger">Удалить</button>
+</form>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</html>
