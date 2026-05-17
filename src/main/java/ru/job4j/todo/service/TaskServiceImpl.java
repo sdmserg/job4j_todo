@@ -25,6 +25,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public boolean completeTask(int id) {
+        return taskStory.completeTask(id);
+    }
+
+    @Override
     public boolean deleteById(int id) {
         return taskStory.deleteById(id);
     }
