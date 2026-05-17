@@ -14,13 +14,15 @@ job4j_todo — это веб-приложение для управления з
 - Java 17
 - Spring Boot 2.7.3
 - Hibernate 5.6.11.Final
-- PostgreSQL 14
+- PostgreSQL 16
 - PostgreSQL JDBC Driver 42.2.9
 - Thymeleaf
-- Bootstrap
+- Bootstrap 5
 - Liquibase 4.15.0
 - Maven
 - Lombok 1.18.30
+- SLF4J
+- Logback
 
 ---
 
@@ -35,7 +37,134 @@ job4j_todo — это веб-приложение для управления з
 
 ---
 
+## Запуск проекта
+
+### 1. Клонировать проект
+
+```bash
+git clone git@github.com:sdmserg/job4j_todo.git
+```
+
+---
+
+### 2. Создать базу данных
+
+```sql
+create database todo;
+```
+
+---
+
+### 3. Настроить подключение к БД
+
+Указать username и password PostgreSQL в файле:
+
+```text
+src/main/resources/hibernate.cfg.xml
+```
+
+---
+
+### 4. Запустить приложение
+
+Через Maven:
+
+```bash
+mvn spring-boot:run
+```
+
+или через IntelliJ IDEA запуском главного класса приложения.
+
+---
+
+### 5. Открыть приложение
+
+```text
+http://localhost:8080
+```
+
+---
+
+## Взаимодействие с приложением
+
+### Список всех задач
+
+На странице отображаются:
+- список задач;
+- дата создания;
+- статус выполнения;
+- фильтрация задач.
+
+![Список задач](images/task_list.png)
+
+---
+
+### Создание задачи
+
+![Создание задачи](images/create_task.png)
+
+---
+
+### Список всех задач после создания задачи
+
+![Список задач](images/task_list_after_create_task.png)
+
+---
+
+### Просмотр задачи
+
+На странице доступны:
+- выполнение задачи;
+- редактирование;
+- удаление.
+
+![Описание задачи](images/task_description.png)
+
+---
+
+### Редактирование задачи
+
+![Редактирование задачи](images/edit_task.png)
+
+---
+
+### Выполнение задачи
+
+![Редактирование задачи](images/complete_task.png)
+
+---
+
+### Список всех задач после создания задачи
+
+![Список задач](images/task_list_after_create_new_task.png)
+
+
+### Выполненные задачи
+
+![Выполненные задачи](images/completed_tasks.png)
+
+---
+
+### Новые задачи
+
+![Новые задачи](images/new_tasks.png)
+
+---
+
+### Страница ошибки 404
+
+![404](images/error_404.png)
+
+---
+
+### Страница ошибки 500
+
+![500](images/error_500.png)
+
+---
+
 ## Контакты
 
 Email: sdmserg2021@gmail.com
+
 Telegram: @sserg2025
