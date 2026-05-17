@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="text-center">
+    <h1 class="display-4 text-danger">404</h1>
+    <h3 class="mb-3">Страница или задача не найдена</h3>
+    <p class="text-muted">
+        Возможно, задача была удалена или указан неверный ID.
+    </p>
+    <a class="btn btn-primary mt-3" href="/tasks/list">
+        На главную
+    </a>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</html>
