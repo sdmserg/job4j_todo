@@ -6,8 +6,14 @@
 <h3>Описание задачи</h3>
 
 <div class="card p-3 mb-3">
-    <p><b>Описание:</b> <span th:text="${task.description}"></span></p>
-    <p><b>Создано:</b> <span th:text="${task.created}"></span></p>
+    <p>
+        <b>Описание:</b>
+        <span th:text="${task.description}"></span>
+    </p>
+    <p>
+        <b>Создано:</b>
+        <span th:text="${#temporals.format(task.created, 'yyyy-MM-dd HH:mm:ss')}"></span>
+    </p>
     <p>
         <b>Статус:</b>
         <span th:if="${task.done}" class="text-success">Выполнено</span>
