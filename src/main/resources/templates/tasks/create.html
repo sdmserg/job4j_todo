@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments/header :: header"></div>
+
+<h3>Создать задачу</h3>
+
+<form action="/tasks/create" method="post">
+    <div class="mb-3">
+        <label class="form-label">Описание</label>
+        <input type="text" name="description" class="form-control">
+    </div>
+    <button class="btn btn-success">Создать</button>
+</form>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</html>
