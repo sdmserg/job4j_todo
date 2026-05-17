@@ -45,7 +45,7 @@ public class TaskStory implements TaskStoryRepository {
                     "UPDATE Task SET description = :fDescription, "
                     + "done = :fDone WHERE id =:fId")
                     .setParameter("fDescription", task.getDescription())
-                    .setParameter("fDone", task.getDone())
+                    .setParameter("fDone", task.isDone())
                     .setParameter("fId", task.getId())
                     .executeUpdate();
             transaction.commit();
@@ -56,6 +56,26 @@ public class TaskStory implements TaskStoryRepository {
             }
             LOGGER.error("Failed to update task: {}", task, e);
             throw new IllegalStateException("Failed to update task", e);
+        }
+    }
+
+    @Override
+    public boolean completeTask(int id) {
+        Transaction transaction = null;
+        try (Session session = sf.openSession()) {
+            transaction = session.beginTransaction();
+            int rowsUpdate = session.createQuery(
+                    "UPDATE Task SET done = true WHERE id = :fId")
+                    .setParameter("fId", id)
+                    .executeUpdate();
+            transaction.commit();
+            return rowsUpdate > 0;
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            LOGGER.error("Failed to complete task with id: {}", id, e);
+            throw new IllegalStateException("Failed to complete task", e);
         }
     }
 
