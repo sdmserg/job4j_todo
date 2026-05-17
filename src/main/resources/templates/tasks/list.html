@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments/header :: header"></div>
+
+<h3>Список задач</h3>
+
+<a class="btn btn-primary mb-3" href="/tasks/create">
+    Добавить задание
+</a>
+
+<div class="mb-3">
+    <a class="btn btn-outline-secondary" href="/tasks/list">Все</a>
+    <a class="btn btn-outline-warning" href="/tasks/list/new">Новые</a>
+    <a class="btn btn-outline-success" href="/tasks/list/completed">Выполненные</a>
+</div>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Описание</th>
+        <th>Дата</th>
+        <th>Статус</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="task : ${tasks}">
+        <td>
+            <a th:href="@{/tasks/{id}(id=${task.id})}"
+               th:text="${task.description}">
+            </a>
+        </td>
+        <td th:text="${#temporals.format(task.created, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td>
+            <span th:if="${task.done}" class="badge bg-success">Выполнено</span>
+            <span th:if="${!task.done}" class="badge bg-warning">Новое</span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</html>
