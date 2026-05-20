@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="text-center">
+    <h1 class="display-4 text-danger">500</h1>
+    <h3 class="mb-3">Внутренняя ошибка сервера</h3>
+    <p class="text-muted">
+        Что-то пошло не так при обработке запроса.
+    </p>
+    <div class="alert alert-warning mt-3" th:if="${message}">
+        <span th:text="${message}"></span>
+    </div>
+    <a class="btn btn-primary mt-3" href="/tasks/list">
+        На главную
+    </a>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</html>
