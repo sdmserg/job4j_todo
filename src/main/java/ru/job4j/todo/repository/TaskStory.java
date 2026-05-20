@@ -43,9 +43,10 @@ public class TaskStory implements TaskStoryRepository {
             transaction = session.beginTransaction();
             int rowsUpdated = session.createQuery(
                     "UPDATE Task SET description = :fDescription, "
-                    + "done = :fDone WHERE id =:fId")
+                    + "done = :fDone, title = :fTitle WHERE id =:fId")
                     .setParameter("fDescription", task.getDescription())
                     .setParameter("fDone", task.isDone())
+                    .setParameter("fTitle", task.getTitle())
                     .setParameter("fId", task.getId())
                     .executeUpdate();
             transaction.commit();

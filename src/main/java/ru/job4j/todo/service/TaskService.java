@@ -15,7 +15,7 @@ public interface TaskService {
 
     boolean deleteById(int id);
 
-    Optional<Task> findById(int id);
+    Task findById(int id);
 
     Collection<Task> findByDone(boolean done);
 

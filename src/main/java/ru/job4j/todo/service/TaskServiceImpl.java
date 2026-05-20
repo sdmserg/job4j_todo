@@ -7,7 +7,7 @@ import ru.job4j.todo.model.Task;
 import ru.job4j.todo.repository.TaskStoryRepository;
 
 import java.util.Collection;
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 @Service
 @AllArgsConstructor
@@ -35,8 +35,10 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Optional<Task> findById(int id) {
-        return taskStory.findById(id);
+    public Task findById(int id) {
+        return taskStory.findById(id)
+                .orElseThrow(() ->
+                        new NoSuchElementException("Task not found!"));
     }
 
     @Override
