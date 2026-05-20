@@ -75,9 +75,15 @@ public class TaskController {
         return "redirect:/tasks/list";
     }
 
-    @ExceptionHandler({NoSuchElementException.class, IllegalStateException.class})
+    @ExceptionHandler(NoSuchElementException.class)
     public String handleNoSuchElement(NoSuchElementException e, Model model) {
         model.addAttribute("message", e.getMessage());
         return "errors/404";
+    }
+
+    @ExceptionHandler(IllegalStateException.class)
+    public String handleIllagelState(IllegalStateException e, Model model) {
+        model.addAttribute("message", e.getMessage());
+        return "errors/500";
     }
 }
