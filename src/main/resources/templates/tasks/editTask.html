@@ -8,22 +8,35 @@
 <form th:action="@{/tasks/{id}/update(id=${task.id})}" method="post">
 
     <div class="mb-3">
-        <label class="form-label">Описание</label>
+        <label class="form-label">Название задачи</label>
         <input type="text"
-               name="description"
-               th:value="${task.description}"
-               class="form-control">
+               name="title"
+               th:value="${task.title}"
+               class="form-control"
+               required>
     </div>
+    <div class="mb-3">
+        <label class="form-label">Описание задачи</label>
 
+        <textarea name="description"
+                  class="form-control"
+                  rows="5"
+                  th:text="${task.description}">
+        </textarea>
+    </div>
     <div class="form-check mb-3">
         <input type="checkbox"
                name="done"
                th:checked="${task.done}"
                class="form-check-input">
-        <label class="form-check-label">Выполнено</label>
-    </div>
 
-    <button class="btn btn-primary">Сохранить</button>
+        <label class="form-check-label">
+            Выполнено
+        </label>
+    </div>
+    <button class="btn btn-primary">
+        Сохранить
+    </button>
 </form>
 
 <div th:replace="fragments/footer :: footer"></div>

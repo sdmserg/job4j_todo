@@ -18,8 +18,8 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <th>Описание</th>
-        <th>Дата</th>
+        <th>Название</th>
+        <th>Дата создания</th>
         <th>Статус</th>
     </tr>
     </thead>
@@ -28,13 +28,18 @@
     <tr th:each="task : ${tasks}">
         <td>
             <a th:href="@{/tasks/{id}(id=${task.id})}"
-               th:text="${task.description}">
+               th:text="${task.title}">
             </a>
         </td>
         <td th:text="${#temporals.format(task.created, 'yyyy-MM-dd HH:mm:ss')}"></td>
         <td>
-            <span th:if="${task.done}" class="badge bg-success">Выполнено</span>
-            <span th:if="${!task.done}" class="badge bg-warning">Новое</span>
+            <span th:if="${task.done}" class="badge bg-success">
+                Выполнено
+            </span>
+
+            <span th:if="${!task.done}" class="badge bg-warning">
+                Новое
+            </span>
         </td>
     </tr>
     </tbody>

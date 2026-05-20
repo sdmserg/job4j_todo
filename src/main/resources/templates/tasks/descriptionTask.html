@@ -3,9 +3,14 @@
 
 <div th:replace="fragments/header :: header"></div>
 
-<h3>Описание задачи</h3>
+<h3>Подробности задачи</h3>
 
 <div class="card p-3 mb-3">
+
+    <p>
+        <b>Название:</b>
+        <span th:text="${task.title}"></span>
+    </p>
     <p>
         <b>Описание:</b>
         <span th:text="${task.description}"></span>
@@ -16,8 +21,12 @@
     </p>
     <p>
         <b>Статус:</b>
-        <span th:if="${task.done}" class="text-success">Выполнено</span>
-        <span th:if="${!task.done}" class="text-warning">Новое</span>
+        <span th:if="${task.done}" class="text-success">
+            Выполнено
+        </span>
+        <span th:if="${!task.done}" class="text-warning">
+            Новое
+        </span>
     </p>
 </div>
 
@@ -25,10 +34,14 @@
       th:action="@{/tasks/{id}/done(id=${task.id})}"
       method="post"
       style="display:inline;">
-    <button class="btn btn-success">Выполнено</button>
+    <button class="btn btn-success">
+        Выполнено
+    </button>
 </form>
 
-<button th:if="${task.done}" class="btn btn-secondary" disabled>
+<button th:if="${task.done}"
+        class="btn btn-secondary"
+        disabled>
     Уже выполнено
 </button>
 
@@ -40,7 +53,9 @@
 <form th:action="@{/tasks/{id}/delete(id=${task.id})}"
       method="get"
       style="display:inline;">
-    <button class="btn btn-danger">Удалить</button>
+    <button class="btn btn-danger">
+        Удалить
+    </button>
 </form>
 
 <div th:replace="fragments/footer :: footer"></div>

@@ -7,10 +7,23 @@
 
 <form action="/tasks/create" method="post">
     <div class="mb-3">
-        <label class="form-label">Описание</label>
-        <input type="text" name="description" class="form-control">
+        <label class="form-label">Название</label>
+        <input type="text"
+               name="title"
+               class="form-control"
+               placeholder="Название задачи"
+               required>
     </div>
-    <button class="btn btn-success">Создать</button>
+    <div class="mb-3">
+        <label class="form-label">Описание</label>
+        <textarea name="description"
+                  class="form-control"
+                  rows="5"
+                  placeholder="Описание задачи"></textarea>
+    </div>
+    <button class="btn btn-success">
+        Создать
+    </button>
 </form>
 
 <div th:replace="fragments/footer :: footer"></div>
