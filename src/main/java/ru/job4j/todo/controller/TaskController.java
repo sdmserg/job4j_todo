@@ -82,7 +82,7 @@ public class TaskController {
     }
 
     @ExceptionHandler(IllegalStateException.class)
-    public String handleIllagelState(IllegalStateException e, Model model) {
+    public String handleIllegalState(IllegalStateException e, Model model) {
         model.addAttribute("message", e.getMessage());
         return "errors/500";
     }

@@ -32,7 +32,7 @@ public class TaskStory implements TaskStoryRepository {
                 transaction.rollback();
             }
             LOGGER.error("Failed to add task: {}", task, e);
-            throw new IllegalStateException("Failed to add task", e);
+            throw new IllegalStateException("Database error while saving task", e);
         }
     }
 
@@ -56,7 +56,7 @@ public class TaskStory implements TaskStoryRepository {
                 transaction.rollback();
             }
             LOGGER.error("Failed to update task: {}", task, e);
-            throw new IllegalStateException("Failed to update task", e);
+            throw new IllegalStateException("Database error while updating task", e);
         }
     }
 
@@ -76,7 +76,7 @@ public class TaskStory implements TaskStoryRepository {
                 transaction.rollback();
             }
             LOGGER.error("Failed to complete task with id: {}", id, e);
-            throw new IllegalStateException("Failed to complete task", e);
+            throw new IllegalStateException("Database error while completing task", e);
         }
     }
 
@@ -96,7 +96,7 @@ public class TaskStory implements TaskStoryRepository {
                 transaction.rollback();
             }
             LOGGER.error("Failed to delete task with id: {}", id, e);
-            throw new IllegalStateException("Failed to delete task", e);
+            throw new IllegalStateException("Database error while deleting task", e);
         }
     }
 
@@ -116,7 +116,7 @@ public class TaskStory implements TaskStoryRepository {
                 transaction.rollback();
             }
             LOGGER.error("Failed to find task with id: {}", id, e);
-            throw new IllegalStateException("Failed to find task", e);
+            throw new IllegalStateException("Database error while finding task", e);
         }
     }
 
@@ -136,7 +136,7 @@ public class TaskStory implements TaskStoryRepository {
                 transaction.rollback();
             }
             LOGGER.error("Failed to find tasks", e);
-            throw new IllegalStateException("Failed to find task", e);
+            throw new IllegalStateException("Database error while finding tasks", e);
         }
     }
 
@@ -155,7 +155,7 @@ public class TaskStory implements TaskStoryRepository {
                 transaction.rollback();
             }
             LOGGER.error("Failed to find tasks", e);
-            throw new IllegalStateException("Failed to find task", e);
+            throw new IllegalStateException("Database error while finding tasks", e);
         }
     }
 }
