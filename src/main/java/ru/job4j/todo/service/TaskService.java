@@ -9,11 +9,11 @@ public interface TaskService {
 
     Task add(Task task);
 
-    boolean update(Task task);
+    void update(Task task);
 
-    boolean completeTask(int id);
+    void completeTask(int id);
 
-    boolean deleteById(int id);
+    void deleteById(int id);
 
     Task findById(int id);
 

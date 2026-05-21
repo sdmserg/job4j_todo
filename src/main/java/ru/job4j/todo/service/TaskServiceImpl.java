@@ -4,7 +4,7 @@ package ru.job4j.todo.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.job4j.todo.model.Task;
-import ru.job4j.todo.repository.TaskStoryRepository;
+import ru.job4j.todo.repository.TaskStoreRepository;
 
 import java.util.Collection;
 import java.util.NoSuchElementException;
@@ -12,42 +12,60 @@ import java.util.NoSuchElementException;
 @Service
 @AllArgsConstructor
 public class TaskServiceImpl implements TaskService {
-    private final TaskStoryRepository taskStory;
+    private final TaskStoreRepository taskStore;
 
     @Override
     public Task add(Task task) {
-        return taskStory.add(task);
+        return taskStore.add(task);
     }
 
     @Override
-    public boolean update(Task task) {
-        return taskStory.update(task);
+    public void update(Task task) {
+        var isUpdated = taskStore.update(task);
+        if (!isUpdated) {
+            throw new NoSuchElementException(
+                    "Task with id " + task.getId() + " not found!"
+            );
+        }
     }
 
     @Override
-    public boolean completeTask(int id) {
-        return taskStory.completeTask(id);
+    public void completeTask(int id) {
+        var isCompleted = taskStore.completeTask(id);
+        if (!isCompleted) {
+            throw new NoSuchElementException(
+                    "Task with id " + id + " not found!"
+            );
+        }
     }
 
     @Override
-    public boolean deleteById(int id) {
-        return taskStory.deleteById(id);
+    public void deleteById(int id) {
+        var isDeleted = taskStore.deleteById(id);
+        if (!isDeleted) {
+            throw new NoSuchElementException(
+                    "Task with id " + id + " not found!"
+            );
+        }
     }
 
     @Override
     public Task findById(int id) {
-        return taskStory.findById(id)
+        return taskStore.findById(id)
                 .orElseThrow(() ->
-                        new NoSuchElementException("Task not found!"));
+                        new NoSuchElementException(
+                                "Task with id " + id + " not found!"
+                        )
+                );
     }
 
     @Override
     public Collection<Task> findByDone(boolean done) {
-        return taskStory.findByDone(done);
+        return taskStore.findByDone(done);
     }
 
     @Override
     public Collection<Task> findAll() {
-        return taskStory.findAll();
+        return taskStore.findAll();
     }
 }
