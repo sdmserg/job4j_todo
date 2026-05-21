@@ -15,8 +15,8 @@ import java.util.Optional;
 
 @Repository
 @AllArgsConstructor
-public class TaskStory implements TaskStoryRepository {
-    private final static Logger LOGGER = LoggerFactory.getLogger(TaskStory.class);
+public class TaskStore implements TaskStoreRepository {
+    private final static Logger LOGGER = LoggerFactory.getLogger(TaskStore.class);
     private final SessionFactory sf;
 
     @Override

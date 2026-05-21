@@ -5,7 +5,7 @@ import ru.job4j.todo.model.Task;
 import java.util.Collection;
 import java.util.Optional;
 
-public interface TaskStoryRepository {
+public interface TaskStoreRepository {
     Task add(Task task);
 
     boolean update(Task task);
