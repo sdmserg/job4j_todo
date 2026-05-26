@@ -6,7 +6,7 @@
 <h3>Список задач</h3>
 
 <a class="btn btn-primary mb-3" href="/tasks/create">
-    Добавить задание
+    Добавить задачу
 </a>
 
 <div class="mb-3">
@@ -16,10 +16,11 @@
 </div>
 
 <table class="table table-striped">
+
     <thead>
     <tr>
         <th>Название</th>
-        <th>Дата создания</th>
+        <th>Дата</th>
         <th>Статус</th>
     </tr>
     </thead>
@@ -28,21 +29,18 @@
     <tr th:each="task : ${tasks}">
         <td>
             <a th:href="@{/tasks/{id}(id=${task.id})}"
-               th:text="${task.title}">
-            </a>
+               th:text="${task.title}"></a>
         </td>
-        <td th:text="${#temporals.format(task.created, 'yyyy-MM-dd HH:mm:ss')}"></td>
-        <td>
-            <span th:if="${task.done}" class="badge bg-success">
-                Выполнено
-            </span>
 
-            <span th:if="${!task.done}" class="badge bg-warning">
-                Новое
-            </span>
+        <td th:text="${#temporals.format(task.created, 'yyyy-MM-dd HH:mm')}"></td>
+
+        <td>
+            <span th:if="${task.done}" class="badge bg-success">Готово</span>
+            <span th:if="${!task.done}" class="badge bg-warning">Новое</span>
         </td>
     </tr>
     </tbody>
+
 </table>
 
 <div th:replace="fragments/footer :: footer"></div>
