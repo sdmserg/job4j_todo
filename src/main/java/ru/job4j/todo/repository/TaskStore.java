@@ -91,12 +91,13 @@ public class TaskStore implements TaskStoreRepository {
     }
 
     @Override
-    public Collection<Task> findByDone(boolean done) {
+    public Collection<Task> findByDone(boolean done, int userId) {
         try {
             return crudRepository.query(
-                    "FROM Task WHERE done = :fDone",
+                    "FROM Task WHERE done = :fDone AND user_id = :fId",
                           Task.class,
-                          Map.of("fDone", done)
+                          Map.of("fDone", done,
+                                  "fId", userId)
             );
         } catch (HibernateException e) {
             LOGGER.error("Failed to find tasks", e);
@@ -105,11 +106,12 @@ public class TaskStore implements TaskStoreRepository {
     }
 
     @Override
-    public Collection<Task> findAll() {
+    public Collection<Task> findAll(int userId) {
         try {
             return crudRepository.query(
-                    "FROM Task",
-                    Task.class
+                    "FROM Task WHERE user_id = :fId",
+                    Task.class,
+                    Map.of("fId", userId)
             );
         } catch (HibernateException e) {
             LOGGER.error("Failed to find tasks", e);

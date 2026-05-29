@@ -16,7 +16,7 @@ public interface TaskStoreRepository {
 
     Optional<Task> findById(int id);
 
-    Collection<Task> findByDone(boolean done);
+    Collection<Task> findByDone(boolean done, int userid);
 
-    Collection<Task> findAll();
+    Collection<Task> findAll(int userid);
 }
