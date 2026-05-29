@@ -4,9 +4,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.job4j.todo.model.User;
 import ru.job4j.todo.service.TaskService;
 import ru.job4j.todo.model.Task;
 
+import javax.servlet.http.HttpSession;
 import java.util.NoSuchElementException;
 
 @Controller
@@ -16,20 +18,23 @@ public class TaskController {
     private final TaskService taskService;
 
     @GetMapping("/list")
-    public String getAllTasks(Model model) {
-        model.addAttribute("tasks", taskService.findAll());
+    public String getAllTasks(Model model, HttpSession session) {
+        var user = (User) session.getAttribute("user");
+        model.addAttribute("tasks", taskService.findAll(user.getId()));
         return "tasks/list";
     }
 
     @GetMapping("/list/new")
-    public String getNewTasks(Model model) {
-        model.addAttribute("tasks", taskService.findByDone(false));
+    public String getNewTasks(Model model, HttpSession session) {
+        var user = (User) session.getAttribute("user");
+        model.addAttribute("tasks", taskService.findByDone(false, user.getId()));
         return "tasks/list";
     }
 
     @GetMapping("/list/completed")
-    public String getCompletedTasks(Model model) {
-        model.addAttribute("tasks", taskService.findByDone(true));
+    public String getCompletedTasks(Model model, HttpSession session) {
+        var user = (User) session.getAttribute("user");
+        model.addAttribute("tasks", taskService.findByDone(true, user.getId()));
         return "tasks/list";
     }
 
@@ -39,7 +44,9 @@ public class TaskController {
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute Task task, Model model) {
+    public String create(@ModelAttribute Task task, HttpSession session) {
+        var user = (User) session.getAttribute("user");
+        task.setUser(user);
         taskService.add(task);
         return "redirect:/tasks/list";
     }
@@ -51,7 +58,7 @@ public class TaskController {
     }
 
     @PostMapping("/{id}/done")
-    public String completeTask(Model model, @PathVariable int id) {
+    public String completeTask(@PathVariable int id) {
         taskService.completeTask(id);
         return "redirect:/tasks/" + id;
     }
