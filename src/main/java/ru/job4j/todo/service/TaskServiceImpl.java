@@ -60,12 +60,12 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Collection<Task> findByDone(boolean done) {
-        return taskStore.findByDone(done);
+    public Collection<Task> findByDone(boolean done, int userId) {
+        return taskStore.findByDone(done, userId);
     }
 
     @Override
-    public Collection<Task> findAll() {
-        return taskStore.findAll();
+    public Collection<Task> findAll(int userId) {
+        return taskStore.findAll(userId);
     }
 }

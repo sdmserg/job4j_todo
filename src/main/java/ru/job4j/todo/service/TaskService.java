@@ -17,7 +17,7 @@ public interface TaskService {
 
     Task findById(int id);
 
-    Collection<Task> findByDone(boolean done);
+    Collection<Task> findByDone(boolean done, int userId);
 
-    Collection<Task> findAll();
+    Collection<Task> findAll(int userId);
 }
