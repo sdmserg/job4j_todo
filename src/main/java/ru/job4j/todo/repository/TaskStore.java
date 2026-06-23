@@ -80,7 +80,7 @@ public class TaskStore implements TaskStoreRepository {
     public Optional<Task> findById(int id) {
         try {
             return crudRepository.optional(
-                    "FROM Task WHERE id = :fId",
+                    "FROM Task f JOIN FETCH f.priority WHERE id = :fId",
                     Task.class,
                     Map.of("fId", id)
             );
@@ -94,7 +94,7 @@ public class TaskStore implements TaskStoreRepository {
     public Collection<Task> findByDone(boolean done, int userId) {
         try {
             return crudRepository.query(
-                    "FROM Task WHERE done = :fDone AND user_id = :fId",
+                    "FROM Task f JOIN FETCH f.priority WHERE done = :fDone AND user_id = :fId",
                           Task.class,
                           Map.of("fDone", done,
                                   "fId", userId)
@@ -109,7 +109,7 @@ public class TaskStore implements TaskStoreRepository {
     public Collection<Task> findAll(int userId) {
         try {
             return crudRepository.query(
-                    "FROM Task WHERE user_id = :fId",
+                    "FROM Task f JOIN FETCH f.priority WHERE user_id = :fId ",
                     Task.class,
                     Map.of("fId", userId)
             );

@@ -20,6 +20,7 @@
     <thead>
     <tr>
         <th>Название</th>
+        <th>Приоритет</th>
         <th>Дата</th>
         <th>Статус</th>
     </tr>
@@ -31,6 +32,8 @@
             <a th:href="@{/tasks/{id}(id=${task.id})}"
                th:text="${task.title}"></a>
         </td>
+
+        <td th:text="${task.priority.name}"></td>
 
         <td th:text="${#temporals.format(task.created, 'yyyy-MM-dd HH:mm')}"></td>
 
